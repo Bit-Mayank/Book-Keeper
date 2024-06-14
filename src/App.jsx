@@ -8,14 +8,17 @@ function App() {
   const [data, setData] = useState("");
   const [books, setBooks] = useState([]);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const debouncedData = useDebounce(data, 500)
 
   const getData = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await fetch(`https://openlibrary.org/search.json?q=${debouncedData}&limit=10&page=1`);
       const result = await response.json();
       setBooks(result.docs || []);
+      setLoading(false);
       console.log(result); // Use result directly to log the response
     } catch (err) {
       console.log(err);
@@ -51,12 +54,16 @@ function App() {
 
         {show ?
           <div className="absolute top-40 z-0 w-full">
-            <div className=" flex justify-center font-bold text-2xl text-white">Search Results for: <span className="text-red-600 underline">{`${data}`}</span> </div>
-            <div className="grid grid-cols-3 gap-4 mt-3 mx-10 max-[426px]:grid-cols-1 max-[769px]:grid-cols-2">
-              {
-                books?.map(book => <Card book={book} key={book.id} />)
-              }
-            </div>
+            <div className=" flex justify-center font-bold text-2xl text-white">Search Results for: <span className="text-red-600 underline">{`${debouncedData}`}</span> </div>
+            {loading ?
+              <div className="flex justify-center text-xl">Loading...</div>
+              :
+              <div className="grid grid-cols-3 gap-4 mt-3 mx-10 max-[426px]:grid-cols-1 max-[769px]:grid-cols-2">
+                {
+                  books?.map(book => <Card book={book} key={book.id} />)
+                }
+              </div>}
+
           </div>
           :
           null}

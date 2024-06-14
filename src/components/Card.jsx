@@ -5,8 +5,8 @@ export default function Card({ book }) {
     const docs = book;
 
     return (
-        <div className="flex mx-2 w-full border border-red-500 p-1 rounded-sm">
-            <img src={`https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg`} alt={`${docs.title} avatar`} height="40" width="50" />
+        <div className="flex mx-2 w-full border border-red-500 p-2 rounded-md bg-black">
+            <img src={`https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg`} alt={`${docs.title} avatar`} className=" w-40 h-40" />
 
 
             <div className=" flex flex-col text-white px-2">

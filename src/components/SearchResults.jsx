@@ -5,7 +5,9 @@ function SearchResults({ books }) {
 
     return (
         <div className="flex mx-2 w-full border border-red-500 p-1 rounded-sm">
-            <img src={`https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg`} alt={`${docs.title} avatar`} height="40" width="50" />
+            <div className=" block w-20 h-20">
+                <img src={`https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg`} alt={`${docs.title} avatar`} className="  w-full h-full object-cover" />
+            </div>
 
 
             <div className=" flex flex-col text-white px-2">
