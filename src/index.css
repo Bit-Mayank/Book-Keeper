@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  
+  /* Hide scrollbar for Firefox */
+  .hidden-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  /* Hide scrollbar for Internet Explorer and Edge */
+  .hidden-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  body {
+    --tw-bg-opacity: 1;
+    background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+  }
+  
