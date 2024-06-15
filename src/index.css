@@ -16,6 +16,10 @@
     -ms-overflow-style: none; /* IE and Edge */
   }
 
+  .svg-color {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(304deg) brightness(104%) contrast(102%);
+  }
+
   body {
     --tw-bg-opacity: 1;
     background-color: rgb(30 64 175 / var(--tw-bg-opacity));

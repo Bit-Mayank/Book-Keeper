@@ -15,7 +15,7 @@ function SearchBox({ OnChange, data, books, OnClick, show }) {
             {show ?
                 null :
                 <div className="flex flex-col items-center max-h-96 overflow-y-scroll w-2/6 overflow-x-hidden relative mx-auto right-14 border border-black border-1 scroll hidden-scrollbar bg-black max-[426px]:w-3/6">
-                    {books != null ? books.map((book) => <SearchResults key={book.id} books={book} />) : null}
+                    {books != null ? books.map((book) => <SearchResults books={book} key={book.id} />) : null}
                 </div>
             }
 

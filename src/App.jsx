@@ -2,6 +2,7 @@ import SearchBox from "./components/SearchBox"
 import { useState, useEffect, useCallback } from "react";
 import useDebounce from "./hooks/debounce";
 import Card from "./components/Card";
+import Header from "./components/Header";
 
 function App() {
 
@@ -46,7 +47,9 @@ function App() {
     <>
       <div className="h-screen w-full bg-blue-800">
 
-        <div className="flex flex-col justify-center relative top-20 z-10">
+        <Header />
+
+        <div className="flex flex-col justify-center relative top-20">
           <SearchBox OnChange={(data) => handleOnChange(data)} data={data} books={books} OnClick={() => setShow(true)} show={show} />
         </div>
 
