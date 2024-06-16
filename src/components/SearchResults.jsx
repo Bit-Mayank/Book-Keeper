@@ -13,7 +13,7 @@ function SearchResults({ books }) {
             <div className=" flex flex-col text-white px-2">
                 <span className=" text-md font-bold">{`${docs.title}`}</span>
                 <span className=" font-serif text-sm">
-                    {`by ${docs.author_name ? docs.author_name.map(data => (' ' + data)) : "unknown"}`}
+                    {`by ${docs.author_name ? docs.author_name.slice(0, 5).map(data => (' ' + data)) : "unknown"}`}
                 </span>
                 <span className=" text-sm"> {`Rating: ${(docs.ratings_average ? docs.ratings_average.toPrecision(2) : "??")}/5`} </span>
                 <span className=" text-sm"> {`Publish Year: ${(docs.publish_year ? docs.publish_year[0] : "??")}`} </span>

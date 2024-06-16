@@ -2,7 +2,6 @@ import SearchBox from "./components/SearchBox"
 import { useState, useEffect, useCallback } from "react";
 import useDebounce from "./hooks/debounce";
 import Card from "./components/Card";
-import Header from "./components/Header";
 
 function App() {
 
@@ -18,9 +17,11 @@ function App() {
       setLoading(true);
       const response = await fetch(`https://openlibrary.org/search.json?q=${debouncedData}&limit=10&page=1`);
       const result = await response.json();
-      setBooks(result.docs || []);
-      setLoading(false);
-      console.log(result); // Use result directly to log the response
+      if (result.q == debouncedData) {
+        setBooks(result.docs || []);
+        setLoading(false);
+        console.log(result); // Use result directly to log the response
+      }
     } catch (err) {
       console.log(err);
     }
@@ -47,8 +48,6 @@ function App() {
     <>
       <div className="h-screen w-full bg-blue-800">
 
-        <Header />
-
         <div className="flex flex-col justify-center relative top-20">
           <SearchBox OnChange={(data) => handleOnChange(data)} data={data} books={books} OnClick={() => setShow(true)} show={show} />
         </div>
@@ -63,7 +62,7 @@ function App() {
               :
               <div className="grid grid-cols-3 gap-4 mt-3 mx-10 max-[426px]:grid-cols-1 max-[769px]:grid-cols-2">
                 {
-                  books?.map(book => <Card book={book} key={book.id} />)
+                  books?.map(book => <Card book={book} key={book.key} searchResult />)
                 }
               </div>}
 
