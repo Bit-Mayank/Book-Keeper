@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <App />
+        element: <App exact />,
       },
       {
         path: 'my-collection',

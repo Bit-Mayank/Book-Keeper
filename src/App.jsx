@@ -15,13 +15,11 @@ function App() {
   const getData = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`https://openlibrary.org/search.json?q=${debouncedData}&limit=10&page=1`);
+      const response = await fetch(`https://openlibrary.org/search.json?q=${debouncedData.trim()}&limit=10&page=1`);
       const result = await response.json();
-      if (result.q == debouncedData) {
-        setBooks(result.docs || []);
-        setLoading(false);
-        console.log(result); // Use result directly to log the response
-      }
+      setBooks(result.docs || []);
+      setLoading(false);
+      console.log(result.q); // Use result directly to log the response
     } catch (err) {
       console.log(err);
     }

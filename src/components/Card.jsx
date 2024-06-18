@@ -34,7 +34,7 @@ export default function Card({ book, searchResult, setItems, items }) {
     }
 
     return (
-        <div className="flex mx-2 w-full border border-red-500 p-2 rounded-md bg-black relative">
+        <div className="flex w-full mx-2 border border-red-500 p-2 rounded-md bg-black relative">
             <img src={`https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg`} alt={`${docs.title} avatar`} className=" w-40 h-40" />
 
 
@@ -47,38 +47,25 @@ export default function Card({ book, searchResult, setItems, items }) {
                 <span className=" text-sm"> {`Publish Year: ${(docs.publish_year ? docs.publish_year[0] : "??")}`} </span>
             </div>
 
-            {
-                (searchResult ?
-                    (<div className="absolute" style={{
-                        top: "-0.2rem",
-                        left: "27.7rem"
-                    }}>
-                        {
-                            ((added == true) ?
-                                <button className="text-2xl text-white font-bold active:text-red-600 mt-2" disabled={added}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48">
-                                        <path fill="#c8e6c9" d="M44,24c0,11-9,20-20,20S4,35,4,24S13,4,24,4S44,13,44,24z"></path><polyline fill="none" stroke="#4caf50" strokeMiterlimit="10" strokeWidth="4" points="14,24 21,31 36,16"></polyline>
-                                    </svg>
-                                </button>
-                                :
-                                <button className="text-2xl text-white font-bold active:text-red-600" onClick={(e) => HandleClick(e.target.innerText, docs.key)}>+</button>
-                            )
-                        }
-
-                    </div>)
-                    :
-                    <div className="absolute" style={{
-                        top: "-0.2rem",
-                        left: "28rem"
-                    }}>
+            <div className="absolute sign-btn">
+                {
+                    (searchResult ?
+                        ((added == true) ?
+                            <button className="text-2xl text-white font-bold active:text-red-600 mt-2" disabled={added}>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48">
+                                    <path fill="#c8e6c9" d="M44,24c0,11-9,20-20,20S4,35,4,24S13,4,24,4S44,13,44,24z"></path><polyline fill="none" stroke="#4caf50" strokeMiterlimit="10" strokeWidth="4" points="14,24 21,31 36,16"></polyline>
+                                </svg>
+                            </button>
+                            :
+                            <button className="text-2xl text-white font-bold active:text-red-600" onClick={(e) => HandleClick(e.target.innerText, docs.key)}>+</button>
+                        )
+                        :
                         <button className="text-xl text-white font-bold active:text-red-600" onClick={(e) => HandleClick(e.target.innerText, docs.key)}>x</button>
-                    </div>
-                )
-            }
+                    )
+                }
+            </div>
 
         </div>
     )
 }
-
-
 // return default Card;

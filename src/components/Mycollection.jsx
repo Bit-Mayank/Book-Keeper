@@ -11,7 +11,7 @@ export default function Mycollection() {
                 My Collection
             </div>
 
-            <div className="grid grid-cols-3 gap-4 mt-3 mx-10 max-[426px]:grid-cols-1 max-[769px]:grid-cols-2">
+            <div className="grid grid-cols-3 gap-4 mt-3 mx-10 max-[426px]:grid-cols-1 max-[769px]:grid-cols-2 hidden-scrollbar">
                 {
                     items?.map(book => <Card book={book} key={book.key} setItems={(e) => setItems(e)} items={items} />)
                 }

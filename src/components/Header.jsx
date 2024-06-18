@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom"
 export default function Header() {
     return (
         <div className="flex justify-evenly w-full bg-black p-1 fixed z-30 h-16 max-[426px]:h-14">
-            <NavLink to="/Book-Keeper/">
-                <div className=" text-3xl relative right-80 font-serif text-white bg-yellow-500 p-1 rounded-sm h-12 mt-1 max-[426px]:right-8 max-[426px]:text-xl max-[426px]:h-10">Book-Keeper</div>
+            <NavLink to={``} className=" text-3xl absolute font-serif text-white bg-yellow-500 p-1 rounded-sm h-12 mt-1 left-8 max-[426px]:text-xl max-[426px]:h-10 max-[426px]:left-8 max-[769px]:left-2">
+                <div >Book-Keeper</div>
             </NavLink>
 
-            <div className="text-2xl relative left-80 font-serif text-white p-2 rounded-sm flex gap-7 item-center max-[426px]:static max-[426px]:text-xl max-[426px]:h-10">
-                <NavLink to="/Book-Keeper/" end className={({ isActive }) => (isActive ? " border-b-2 max-[426px]:h-10" : null)}>
+            <div className="text-2xl absolute right-28 font-serif text-white p-2 rounded-sm flex gap-7 item-center max-[426px]:h-10 max-[426px]:right-3 max-[426px]:top-0 max-[769px]:right-2">
+                <NavLink to={``} end className={({ isActive }) => (isActive ? " border-b-2 max-[426px]:h-10" : null)}>
                     <div >
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 24 24" className="svg-color">
                             <path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z"></path>
