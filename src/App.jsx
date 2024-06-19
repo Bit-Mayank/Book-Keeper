@@ -1,17 +1,11 @@
 import SearchBox from "./components/SearchBox"
-import { useState, useEffect, useCallback } from "react";
-// import useDebounce from "./hooks/debounce";
+import { useEffect, useContext } from "react";
 import Card from "./components/Card";
+import { BooksContext } from "./context/BookProvider";
 
-let i = 1;
 function App() {
 
-
-  const [books, setBooks] = useState([]);
-  const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState("");
-  const [debouncedInput, setDebouncedInput] = useState("");
+  const { books, setBooks, loading, data, setData, show, setShow, debouncedInput, setDebouncedInput } = useContext(BooksContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,28 +15,7 @@ function App() {
     return () => {
       clearTimeout(timer);
     };
-  }, [data]);
-
-  const makeAPIcall = useCallback(async (input) => {
-    // Make an API call here
-    try {
-      setLoading(true);
-      const response = await fetch(`https://openlibrary.org/search.json?q=${input.trim()}&limit=10&page=1`);
-      const result = await response.json();
-      setBooks(result.docs || []);
-      setLoading(false);
-      console.log(result.q); // Use result directly to log the response
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (debouncedInput) {
-      console.log(i++);
-      makeAPIcall(debouncedInput);
-    }
-  }, [debouncedInput, makeAPIcall]);
+  }, [data, setDebouncedInput]);
 
 
   function handleOnChange(data) {

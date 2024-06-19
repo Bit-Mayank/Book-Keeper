@@ -5,6 +5,7 @@ import './index.css'
 import Root from './components/Root.jsx'
 import Mycollection from './components/Mycollection.jsx'
 import App from './App'
+import { BooksProvider } from './context/BookProvider.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BooksProvider>
+      <RouterProvider router={router} />
+    </BooksProvider>
     {/* <App /> */}
   </React.StrictMode>,
 )
