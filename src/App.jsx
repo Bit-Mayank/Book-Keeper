@@ -1,21 +1,33 @@
 import SearchBox from "./components/SearchBox"
 import { useState, useEffect, useCallback } from "react";
-import useDebounce from "./hooks/debounce";
+// import useDebounce from "./hooks/debounce";
 import Card from "./components/Card";
 
+let i = 1;
 function App() {
 
-  const [data, setData] = useState("");
+
   const [books, setBooks] = useState([]);
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState("");
+  const [debouncedInput, setDebouncedInput] = useState("");
 
-  const debouncedData = useDebounce(data, 500)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedInput(data);
+    }, 700);
 
-  const getData = useCallback(async () => {
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [data]);
+
+  const makeAPIcall = useCallback(async (input) => {
+    // Make an API call here
     try {
       setLoading(true);
-      const response = await fetch(`https://openlibrary.org/search.json?q=${debouncedData.trim()}&limit=10&page=1`);
+      const response = await fetch(`https://openlibrary.org/search.json?q=${input.trim()}&limit=10&page=1`);
       const result = await response.json();
       setBooks(result.docs || []);
       setLoading(false);
@@ -23,22 +35,21 @@ function App() {
     } catch (err) {
       console.log(err);
     }
-
-  }, [debouncedData])
+  }, []);
 
   useEffect(() => {
-    if (debouncedData) {
-      getData();
-    } else {
-      setBooks([])
+    if (debouncedInput) {
+      console.log(i++);
+      makeAPIcall(debouncedInput);
     }
-
-  }, [debouncedData, getData]);
+  }, [debouncedInput, makeAPIcall]);
 
 
   function handleOnChange(data) {
-    setData(data);
     setShow(false);
+    setData(data);
+    if (!data)
+      setBooks([]);
   }
 
 
@@ -54,7 +65,7 @@ function App() {
 
         {show ?
           <div className="absolute top-40 z-0 w-full">
-            <div className=" flex justify-center font-bold text-2xl text-white">Search Results for: <span className="text-red-600 underline">{`${debouncedData}`}</span> </div>
+            <div className=" flex justify-center font-bold text-2xl text-white">Search Results for: <span className="text-red-600 underline">{`${debouncedInput}`}</span> </div>
             {loading ?
               <div className="flex justify-center text-xl">Loading...</div>
               :
